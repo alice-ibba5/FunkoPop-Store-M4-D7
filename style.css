@@ -7,3 +7,17 @@ main img {
     aspect-ratio: 0.7;
     object-fit: cover;
 }
+
+.card {
+    margin: 10px;
+    box-shadow: 5px 5px 15px 1px #000000;
+}
+
+body {
+    background-color: #00AEEF;
+}
+
+.card p:last-of-type {
+    
+    color: white;
+}

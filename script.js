@@ -28,13 +28,13 @@ async function loadData() {
   function displayData(data) {
     row.innerHTML = data.map(({name, description, brand, imageUrl, price}) => /*html*/`
 
-    <div class="card" style="width: 18rem;">
+    <div class="card col-3" style="width: 18rem;">
     <img src="${imageUrl}" class="card-img-top" alt="...">
-    <div class="card-body">
+    <div class="card-body d-flex flex-column align-items-start">
       <h5 class="card-title">${name}</h5>
       <p class="card-text">${description}</p>
       <p class="card-text"> ${brand}</p>
-      <p class="card-text">${price} €</p>
+      <p class="card-text badge bg-dark">${price} €</p>
       <a href="#" class="btn btn-outline-primary">Add to cart</a>
     </div>
   </div>   
