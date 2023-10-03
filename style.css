@@ -1,0 +1,9 @@
+nav img {
+    width: 200px;
+}
+
+main img {
+    width: 100%;
+    aspect-ratio: 0.7;
+    object-fit: cover;
+}
