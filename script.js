@@ -26,19 +26,22 @@ async function loadData() {
   }
   
   function displayData(data) {
-    row.innerHTML = data.map(({name, description, brand, imageUrl, price}) => /*html*/`
+    row.innerHTML = data.map(({name, description, brand, imageUrl, price, _id}) => /*html*/`
 
-    <div class="card col-3" style="width: 18rem;">
+    <div class="card col-3" id="funko${_id}" style="width: 18rem;" >
     <img src="${imageUrl}" class="card-img-top" alt="...">
     <div class="card-body d-flex flex-column align-items-start">
       <h5 class="card-title">${name}</h5>
       <p class="card-text">${description}</p>
       <p class="card-text"> ${brand}</p>
       <p class="card-text badge bg-dark">${price} €</p>
-      <a href="#" class="btn btn-outline-primary">Add to cart</a>
+      <div class="d-flex justify-content-between">
+      <a href="#" class="btn btn-outline-primary" onclick="addToCart('${name}', '${price}', '${imageUrl}', '${_id}')">Add to cart</a>
+      <a href="product/product.html?id=${_id}" class="ms-5"> <button class="btn btn-outline-info">Details</button></a>
+      </div>
     </div>
-  </div>   
-  
+    </div>   
+
     `).join("")
 }
 
@@ -80,8 +83,81 @@ const login = (event) => {
 }
 
 
+const addToCart = (name, price, imageUrl, _id) => {
+  const card = document.querySelector("#funko" + _id);
+  card.style.opacity = "0.5";
+  const cart = document.querySelector(".list-group");
+  cart.innerHTML += `
+  <li class="list-group-item"> 
+    <div class="d-flex flex-nowrap">
+      <img src="${imageUrl}"/>
+      <div class="ms-2">
+         <p>${name}</p>
+         <p>${price} €</p>
+         <button class="btn btn-outline-secondary align-self-center" onclick='removeFromCart(event, "${_id}", "${price}")'> X </button>
+      </div>   
+    </div>    
+  </li>`;
+  const totale = document.querySelector("h1 span");
+  totale.innerText = (Number(totale.innerHTML) + Number(price)).toFixed(2);
+
+  const counter = document.querySelector(".counter");
+  counter.innerText = document.getElementById('carrello').getElementsByTagName('li').length;
+};
 
 
+const removeFromCart = (event, _id, price) => {
+  event.target.closest("li").remove();
+  const totale = document.querySelector("h1 span");
+  totale.innerText = (Number(totale.innerText) - Number(price)).toFixed(2);
+  const book = document.querySelector("#funko" + _id);
+  book.style.opacity = "1";
 
-
+  const counter = document.querySelector(".counter");
+  counter.innerText = document.getElementById('carrello').getElementsByTagName('li').length;
+};
      
+
+const emptyCart = () => {
+  document.querySelector(".list-group").innerHTML = "";
+  document
+    .querySelectorAll(".card")
+    .forEach((card) => (card.style.opacity = "1"));
+  const totale = document.querySelector("h1 span");
+  totale.innerText = "0";
+
+  const counter = document.querySelector(".counter");
+  counter.innerText = document.getElementById('carrello').getElementsByTagName('li').length;
+};
+
+
+/*const searchProduct = (ev) => {
+  let query = ev.target.value;
+  let allNames = document.querySelectorAll(".card-title");
+  console.log(
+    query,
+    allNames[0].innerText.toLowerCase().includes(query.toLowerCase())
+  );
+  allNames.forEach((name) => {
+    const currCard = name.parentElement.parentElement.parentElement;
+    if (!name.innerHTML.toLowerCase().includes(query.toLowerCase())) {
+      currCard.style.display = "none";
+    } else {
+      currCard.style.display = "block";
+    }
+  });
+};*/
+
+const searchProduct = (ev) =>{
+  let research = document.getElementById("input-query")
+  const input = research.value;
+  const name = document.getElementsByClassName('card-title');
+  const user = document.getElementsByClassName('card');
+  for (let i = 0; i < name.length; i++) {
+    if (name[i].innerHTML.toLowerCase().indexOf(input.toLowerCase()) > -1) {
+      user[i].style.display = '';
+    } else {
+      user[i].style.display = 'none';
+    }
+  }
+}

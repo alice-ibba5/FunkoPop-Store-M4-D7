@@ -21,3 +21,9 @@ body {
     
     color: white;
 }
+
+.list-group img {
+    width: 40%;
+    aspect-ratio: 0.7;
+    object-fit: cover;
+}
