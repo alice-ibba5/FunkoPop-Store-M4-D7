@@ -92,8 +92,9 @@ const addToCart = (name, price, imageUrl, _id) => {
     <div class="d-flex flex-nowrap">
       <img src="${imageUrl}"/>
       <div class="ms-2">
-         <p>${name}</p>
+         <p class="name">${name}</p>
          <p>${price} €</p>
+         <p>Quantity: <span class="quantity">1</span></p>
          <button class="btn btn-outline-secondary align-self-center" onclick='removeFromCart(event, "${_id}", "${price}")'> X </button>
       </div>   
     </div>    
@@ -103,7 +104,52 @@ const addToCart = (name, price, imageUrl, _id) => {
 
   const counter = document.querySelector(".counter");
   counter.innerText = document.getElementById('carrello').getElementsByTagName('li').length;
+
 };
+
+
+/*const addQuantity = () => {
+  const quantity = document.querySelector(".quantity");
+  const item = document.querySelector(".name");
+  const cart = document.querySelector(".list-group-item");
+  if (item === data.name) {
+    cart.innerHTML = ''
+    quantity.innerText++
+  } else {
+    quantity.innerText = 1
+  }};*/
+
+
+
+
+//funzione per aumentare la quantità di un prodotto nel carrello se già presente
+
+/*let products = [];
+
+$.ajax({
+  url: "products.json",
+  dataType: "json",
+  success: function(data) {
+    products = data;
+  }
+});
+
+const addQuantity = (id) => {
+  const cart = document.querySelector(".list-group");
+  const check = cart.every((item) => {
+    return item.id !== id;
+  });
+  const cartData = products.filter((el) => {
+    return el.id === id;
+  });
+  if (check) {
+    setCart([...cart, ...cartData]);
+  } else {
+    const itemForCountIncrease = cart.find((item) => item.id == id);
+    itemForCountIncrease.count += 1;
+    setCart([...cart.filter((item) => item.id != id), itemForCountIncrease]);
+  }
+};*/
 
 
 const removeFromCart = (event, _id, price) => {
@@ -161,3 +207,5 @@ const searchProduct = (ev) =>{
     }
   }
 }
+
+
