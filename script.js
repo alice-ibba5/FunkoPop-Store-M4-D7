@@ -5,6 +5,7 @@ let brand = document.querySelector('#inputBrand')
 let imageUrl = document.querySelector('#inputImage')
 let price = document.querySelector('#inputPrice')
 let row = document.querySelector("#main-row")
+let resultsContainer = document.querySelector("#main-row > div");
 
 myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTFiZjY1MzM5MzI3YzAwMThkM2EyYzgiLCJpYXQiOjE2OTYzMzEzNDcsImV4cCI6MTY5NzU0MDk0N30.eBm-Zar-IK06I2wuKIz5gEdcJRr6e7fX0RqGRUVx6E0");
 
@@ -24,8 +25,11 @@ async function loadData() {
       console.log(error)
   }
   }
+
+ 
   
   function displayData(data) {
+
     row.innerHTML = data.map(({name, description, brand, imageUrl, price, _id}) => /*html*/`
 
     <div class="card col-3" id="funko${_id}" style="width: 18rem;" >
@@ -45,6 +49,7 @@ async function loadData() {
     `).join("")
 }
 
+
 window.onload = async function () {
     try {
         const productData = await loadData()
@@ -53,21 +58,6 @@ window.onload = async function () {
         console.log(error)
     }
 }
-
-
-
-
-/*fetch("https://striveschool-api.herokuapp.com/api/product/", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
-
-  fetch("https://striveschool-api.herokuapp.com/api/product/", {
-headers: {
-"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTFiZjY1MzM5MzI3YzAwMThkM2EyYzgiLCJpYXQiOjE2OTYzMzEzNDcsImV4cCI6MTY5NzU0MDk0N30.eBm-Zar-IK06I2wuKIz5gEdcJRr6e7fX0RqGRUVx6E0"
-}
-})*/
-
 
 
 const login = (event) => {
