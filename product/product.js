@@ -1,4 +1,5 @@
 const url = "https://striveschool-api.herokuapp.com/api/product/";
+let cont = document.querySelector("#main-row");
 
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
@@ -23,11 +24,33 @@ async function loadData(id) {
   }
   }
   
+  cont.innerHTML = /*html*/`
+ <div class="jelly"></div>
+
+ <svg width="0" height="0" class="jelly-maker">
+   <defs>
+     <filter id="uib-jelly-ooze">
+       <feGaussianBlur
+         in="SourceGraphic"
+         stdDeviation="6.25"
+         result="blur"
+       />
+       <feColorMatrix
+         in="blur"
+         mode="matrix"
+         values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
+         result="ooze"
+       />
+       <feBlend in="SourceGraphic" in2="ooze" />
+     </filter>
+   </defs>
+ </svg>`
+
 
   function displayProduct (data) {
-    let cont = document.querySelector("#main-row");
     
-          cont.innerHTML += ` 
+    
+          cont.innerHTML = /*html*/` 
                        <div class="container d-flex">
                          <img class="image col-12 col-lg-3" src="${data.imageUrl}" alt="">
                          <div class="d-flex flex-column ms-5 info">
@@ -35,7 +58,11 @@ async function loadData(id) {
                            <h4 class="description">${data.description}</h4>
                            <h4 class="brand">${data.brand}</h4>
                            <h3 class="price">Price: ${data.price} €</h3>
+                           <div class="d-flex">
+                             <a href="../index.html" class=""> <button class="btn btn-outline-dark"><i class="bi bi-arrow-left-short"></i>Back</button></a>
+                           </div>
                          </div>
+                         
                        </div>`;
     }
 
@@ -48,35 +75,3 @@ async function loadData(id) {
       }
   }
 
-/*let myHeaders = new Headers()
-myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTFiZjY1MzM5MzI3YzAwMThkM2EyYzgiLCJpYXQiOjE2OTYzMzEzNDcsImV4cCI6MTY5NzU0MDk0N30.eBm-Zar-IK06I2wuKIz5gEdcJRr6e7fX0RqGRUVx6E0");
-
-let requestOptions = {
-  method: 'GET',
-  headers: myHeaders,
-  redirect: 'follow'
-};   
-
-const url = "https://striveschool-api.herokuapp.com/api/product/";
-
-const params = new URLSearchParams(window.location.search);
-const id = params.get("id");
-
-fetch(`https://striveschool-api.herokuapp.com/api/product/${id}`, requestOptions)
-.then(response => response.json())
-.then(displayProduct)
-
-function displayProduct(data) {
-let cont = document.querySelector("#main-row");
-
-      cont.innerHTML += ` 
-      <div class="container d-flex">
-      <img class="image col-12 col-lg-3" src="${data.imageUrl}" alt="">
-      <div class="d-flex flex-column ms-5 info">
-        <h1 class="name">${data.name}</h1>
-        <h4 class="description">${data.description}</h4>
-        <h4 class="brand">${data.brand}</h4>
-        <h3 class="price">Price: ${data.price} €</h3>
-      </div>
-    </div>`;
-}*/

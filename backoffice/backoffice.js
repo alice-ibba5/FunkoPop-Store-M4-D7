@@ -27,6 +27,28 @@ async function loadData() {
   }
 
 
+  row.innerHTML = /*html*/`
+  <div class="jelly"></div>
+ 
+  <svg width="0" height="0" class="jelly-maker">
+    <defs>
+      <filter id="uib-jelly-ooze">
+        <feGaussianBlur
+          in="SourceGraphic"
+          stdDeviation="6.25"
+          result="blur"
+        />
+        <feColorMatrix
+          in="blur"
+          mode="matrix"
+          values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
+          result="ooze"
+        />
+        <feBlend in="SourceGraphic" in2="ooze" />
+      </filter>
+    </defs>
+  </svg>`
+
 function displayData(data) {
 
     row.innerHTML = data.map(({name, description, brand, imageUrl, price, _id}) => /*html*/`
@@ -48,8 +70,8 @@ function displayData(data) {
       <p>${price} €</p>
     </div>
     <div class="col-lg-1 d-flex justify-content-lg-between justify-content-between align-items-center align-self-center mb-2">
-      <button class="btn btn-warning px-2 mx-2" onclick="handleEdit('${_id}')"><i class="bi bi-pencil-square"></i></button>
-      <button class="btn btn-danger px-2 mx-2" onclick="handleDelete('${_id}')"><i class="bi bi-trash"></i></button>
+      <button class="btn btn-info px-2 mx-2" onclick="handleEdit('${_id}')"><i class="bi bi-pencil-square"></i></button>
+      <button class="btn btn-dark px-2 mx-2" onclick="handleDelete('${_id}')"><i class="bi bi-trash"></i></button>
     </div>  
     </div>
 
