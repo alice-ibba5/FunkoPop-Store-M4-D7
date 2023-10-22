@@ -5,7 +5,7 @@ const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 
 let myHeaders = new Headers()
-myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTFiZjY1MzM5MzI3YzAwMThkM2EyYzgiLCJpYXQiOjE2OTYzMzEzNDcsImV4cCI6MTY5NzU0MDk0N30.eBm-Zar-IK06I2wuKIz5gEdcJRr6e7fX0RqGRUVx6E0");
+myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTFiZjY1MzM5MzI3YzAwMThkM2EyYzgiLCJpYXQiOjE2OTc5MTI0NTgsImV4cCI6MTY5OTEyMjA1OH0.Blq_SpHYM6SJI29Hj5RF2fv5KGTH4sQ5N1Lkh0kffvw");
 
 let requestOptions = {
   method: 'GET',
